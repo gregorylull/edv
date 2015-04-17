@@ -6,3 +6,4 @@ bower_components
 # misc files
 .DS_STORE
 plan.md
+sql_db.json

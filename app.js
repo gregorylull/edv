@@ -1,1 +1,1 @@
-angular.module("edv", []);
+angular.module("edvApp", []);

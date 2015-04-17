@@ -4,7 +4,7 @@
 */
   wp_head();
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?> ng-app="edv">
+<html <?php language_attributes(); ?> ng-app="edvApp">
 <head>
   <title>EdV</title>
 
