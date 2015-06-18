@@ -25,4 +25,8 @@ function php_path ($filename, $dir="/php/") {
   return $dir . $filename;
 }
 
+function ng_path ($filename="", $dir="/js/angularApp/") {
+  return $dir . $filename;
+}
+
 ?>

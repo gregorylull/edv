@@ -33,6 +33,12 @@
 
 */
 
+/*
+  wp_enqueue_script 
+  wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer )
+
+*/
+
 // scripts to load from html for our app
 function edv_scripts () {
   // angular core and library
@@ -42,17 +48,23 @@ function edv_scripts () {
   wp_enqueue_script( 'jquery', get_template_directory_uri() . bower_path("jquery"), array("edv_theme_local"));
 
   // app scripts
-  wp_enqueue_script( 'app', get_template_directory_uri() . js_path( "app.js", "/") );
+  wp_enqueue_script( 'angular-build', get_template_directory_uri() . "/build/production.js");
 
   // CSS files
   wp_enqueue_style( 'edv_style_sheet', get_stylesheet_uri());
 
   // localize default and admin theme options
   wp_register_script( 'edv_theme_local', get_template_directory_uri() . js_path("localized_wp_scripts.js"));
+  
   $translation_array = array(
-    "options" => get_theme_mods()
+    "options" => get_theme_mods(),
+    "dirPath" => get_template_directory_uri(),
+    "ngPath" => get_template_directory_uri() . ng_path()
   );
+
   wp_localize_script( 'edv_theme_local', 'edvThemeLocal', $translation_array );
+
+  wp_enqueue_script('edv_theme_local');
 }
 
 ?>

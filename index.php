@@ -5,11 +5,12 @@
   get_header();
 ?>
 
-<!-- ENTRY POINT FOR HTML -->
-<div>
-  hello world
-</div>
+<!-- ENTRY POINT FOR BODY -->
+<div edv-header>header</div>
+<div edv-body>body</div>
+<div edv-footer>footers</div>
 
+<!-- END ENTRY POINT FOR BODY -->
 
 <?php
 /*
