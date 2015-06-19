@@ -41,17 +41,23 @@
 
 // scripts to load from html for our app
 function edv_scripts () {
-  // angular core and library
-  wp_enqueue_script( 'angular', get_template_directory_uri() . bower_path("angular"), array("edv_theme_local")); 
-
   // jquery 
   wp_enqueue_script( 'jquery', get_template_directory_uri() . bower_path("jquery"), array("edv_theme_local"));
 
+  // angular core and library
+  wp_enqueue_script( 'angular', get_template_directory_uri() . bower_path("angular"), array("edv_theme_local")); 
+  
+  // foundation css and js
+  wp_enqueue_style( 'normalize', get_template_directory_uri() . bower_path("normalize"), array("edv_theme_local"));
+  wp_enqueue_style( 'foundation', get_template_directory_uri() . bower_path("foundation"), array("edv_theme_local")); 
+  wp_enqueue_script( 'foundationJS', get_template_directory_uri() . bower_path("foundationJS"), array("edv_theme_local"));   
+
   // app scripts
-  wp_enqueue_script( 'angular-build', get_template_directory_uri() . "/build/production.js");
+  wp_enqueue_script( 'angular-build', get_template_directory_uri() . "/build/js/production.js");
 
   // CSS files
   wp_enqueue_style( 'edv_style_sheet', get_stylesheet_uri());
+  wp_enqueue_style( 'edv_scss_css_sheet', get_template_directory_uri() . "/build/css/app.css");
 
   // localize default and admin theme options
   wp_register_script( 'edv_theme_local', get_template_directory_uri() . js_path("localized_wp_scripts.js"));
