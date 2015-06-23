@@ -1,1 +1,4 @@
-angular.module("edvApp", ['edv-header-directive']);
+angular.module("edvApp", [
+  'edv-header'
+  'edv-navbar'
+  ]);

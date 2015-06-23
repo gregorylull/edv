@@ -7,6 +7,7 @@
 
 <!-- ENTRY POINT FOR BODY -->
 <div edv-header>header</div>
+<div edv-navbar> navbar </div>
 <div edv-body>body</div>
 <div edv-footer>footers</div>
 

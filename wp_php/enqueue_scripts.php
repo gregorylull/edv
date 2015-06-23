@@ -65,12 +65,30 @@ function edv_scripts () {
   $translation_array = array(
     "options" => get_theme_mods(),
     "dirPath" => get_template_directory_uri(),
-    "ngPath" => get_template_directory_uri() . ng_path()
   );
 
   wp_localize_script( 'edv_theme_local', 'edvThemeLocal', $translation_array );
 
   wp_enqueue_script('edv_theme_local');
+
+  // localize posts and pages
+  wp_register_script( 'edv_content', get_template_directory_uri() . js_path("localized_wp_scripts.js"));
+  
+  $translation_array = array(
+    "ngPath" => get_template_directory_uri() . ng_path(), // for angular templates
+    "posts" => new WP_Query( array(
+      'category_name'=>'navmain,navsub',
+      'post_type'=>'post',
+    )),
+    "pages" => new WP_Query ( array(
+      'post_type' => 'page',
+      'post_parent'=>'0'
+    ))
+  );
+
+  wp_localize_script( 'edv_content', 'edvContent', $translation_array );
+
+  wp_enqueue_script('edv_content');
 }
 
 ?>
