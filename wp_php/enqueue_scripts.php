@@ -46,10 +46,14 @@ function edv_scripts () {
 
   // angular core and library
   wp_enqueue_script( 'angular', get_template_directory_uri() . bower_path("angular"), array("edv_theme_local")); 
+  wp_enqueue_script( 'angularRoute', get_template_directory_uri() . bower_path("angularRoute"), array("edv_theme_local")); 
   
-  // foundation css and js
-  wp_enqueue_style( 'normalize', get_template_directory_uri() . bower_path("normalize"), array("edv_theme_local"));
-  wp_enqueue_style( 'foundation', get_template_directory_uri() . bower_path("foundation"), array("edv_theme_local")); 
+  // foundation css
+  wp_enqueue_style( 'normalize', get_template_directory_uri() . bower_path("normalize"));
+  wp_enqueue_style( 'foundationCSS', get_template_directory_uri() . bower_path("foundationCSS")); 
+
+  // foundation js
+  wp_enqueue_script( 'modernizr', get_template_directory_uri() . bower_path("modernizr"), array("edv_theme_local"));   
   wp_enqueue_script( 'foundationJS', get_template_directory_uri() . bower_path("foundationJS"), array("edv_theme_local"));   
 
   // app scripts

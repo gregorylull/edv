@@ -10,6 +10,9 @@ var watch = require('gulp-watch');
 var del = require('del');
 var livereload = require('gulp-livereload');
 
+// javascript
+var jshint = require('gulp-jshint');
+
 // angular
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
@@ -32,8 +35,9 @@ var port = 3000;
 var paths = {
   scripts: ['./app.js', './js/angularApp/**/*.js', '!./js/angularApp/**/*_test.js'],
   template: ['./js/angularApp/**/*.html'],
-  php: ['./wp_php/*.php', './php/*.php'],
-  scss: ['./bower_components/foundation/scss/*.scss', './scss/*.scss']
+  php: ['index.php','./wp_php/*.php', './php/*.php'],
+  scss: ['./bower_components/foundation/scss/*.scss', './scss/*.scss'],
+  tests: ['./js/angularApp/**/*_test.js']
 };
 
 /*-----------------------------------------------------------------------------
@@ -50,10 +54,21 @@ var reloadPage = function (f) {
     TASKS
 -----------------------------------------------------------------------------*/
 
+gulp.task('lint', function() {
+  return gulp.src(paths.scripts)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
 // clean javascript code
 gulp.task('cleanJS', function(cb) {
   // You can use multiple globbing patterns as you would with `gulp.src`
   del(['build/js'], cb);
+});
+
+// clean test js code
+gulp.task('cleanTEST', function (cb) {
+  del(['build/test', cb]);
 });
 
 // clean css code
@@ -63,13 +78,23 @@ gulp.task('cleanCSS', function(cb) {
 });
 
 // concat, annotate angular js scripts
-gulp.task('scripts', ['cleanJS'], function() {
+gulp.task('scripts', ['cleanJS','lint'], function() {
   // place code for your default task here
   return gulp.src(paths.scripts)
     .pipe(concat('production.js'))
     .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(gulp.dest('./build/js/'))
+    .pipe(livereload());
+});
+
+// concat TEST scripts
+gulp.task('tests', ['cleanTEST', 'lint'], function () {
+  return gulp.src(paths.tests)
+    .pipe(concat('test.js'))
+    .pipe(ngAnnotate())
+    .pipe(uglify())
+    .pipe(gulp.dest('./build/test/'))
     .pipe(livereload());
 });
 
@@ -93,6 +118,7 @@ gulp.task('watch', function () {
   gulp.watch(paths.php, reloadPage) // php scripts
   gulp.watch(paths.scripts, ['scripts'], reloadPage); // concat scripts
   gulp.watch(paths.scss, ['sass'], reloadPage);
+  gulp.watch(paths.tests, ['tests'])
 });
 
 gulp.task('default', ['watch', 'scripts', 'sass']);

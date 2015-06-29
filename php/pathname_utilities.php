@@ -4,10 +4,12 @@
 function bower_path ($filename, $min=true) {
   $array = array(
     "angular" => "angular/angular.js",
+    "angularRoute" => "angular-route/angular-route.min.js",
     "jquery" => "jquery/dist/jquery.min.js",
-    "foundation" => "foundation/css/foundation.min.css",
     "normalize" => "foundation/css/normalize.min.css",
-    "foundationJS" => "foundation/js/foundation.min.js"
+    "foundationJS" => "foundation/js/foundation.min.js",
+    "foundationCSS" => "foundation/css/foundation.min.css",
+    "modernizr" => "modernizr/modernizr.js"
   );
   $partial_path = $array[$filename];
   return "/bower_components/" . $partial_path;
