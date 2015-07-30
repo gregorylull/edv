@@ -9,6 +9,8 @@ var gulp = require('gulp');
 var watch = require('gulp-watch');
 var del = require('del');
 var livereload = require('gulp-livereload');
+var remember = require('gulp-remember');
+var cache = require('gulp-cached');
 
 // javascript
 var jshint = require('gulp-jshint');
@@ -57,6 +59,7 @@ var reloadPage = function (f) {
 
 gulp.task('lint', function() {
   return gulp.src(paths.scripts)
+    .pipe(cache('linting'))
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
@@ -82,9 +85,11 @@ gulp.task('cleanCSS', function(cb) {
 gulp.task('scripts', ['cleanJS','lint'], function() {
   // place code for your default task here
   return gulp.src(paths.scripts)
-    .pipe(concat('production.js'))
+    .pipe(cache('scripts'))
     .pipe(ngAnnotate())
     .pipe(uglify())
+    .pipe(remember('scripts'))
+    .pipe(concat('production.js'))
     .pipe(gulp.dest('./build/js/'))
     .pipe(livereload());
 });
@@ -102,26 +107,41 @@ gulp.task('tests', ['cleanTEST', 'lint'], function () {
 // scss to css, prefix, and minify
 gulp.task('sass', ['cleanCSS'],function () {
   return gulp.src(paths.scss)
+    .pipe(cache('sass'))
     .pipe(sass({
       includePaths: ['bower_components/foundation/scss'],
       data: ['bower_components/foundation/scss'],
       outputStyle: 'expanded'
     }))
-    .pipe(concatCSS('app.css'))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie'))
+    .pipe(remember('sass'))
+    .pipe(concatCSS('app.css'))
     .pipe(minifycss())
     .pipe(gulp.dest('./build/css/'))
     .pipe(livereload());
 });
 
+var rememberForget = function (name) {
+  return function (event) {
+    if (event.type === 'deleted') { // if a file is deleted, forget about it 
+      delete cache.caches[name][event.path];
+      remember.forget(name, event.path);
+    }
+  }
+};
+
 // auto watch for changes in paths.scripts
 gulp.task('watch', function () {
   livereload({start: true});
-  gulp.watch(paths.template, reloadPage) // .html templates
-  gulp.watch(paths.php, reloadPage) // php scripts
-  gulp.watch(paths.scripts, ['scripts'], reloadPage); // concat scripts
-  gulp.watch(paths.scss, ['sass'], reloadPage);
-  gulp.watch(paths.tests, ['tests'])
+
+  // run scripts
+  gulp.watch(paths.scripts, ['scripts'], reloadPage).on('change', rememberForget('scripts'));
+  gulp.watch(paths.scss, ['sass'], reloadPage).on('change', rememberForget('sass'));
+  gulp.watch(paths.tests, ['tests']).on('change', rememberForget('tests'));
+
+  // only reload
+  gulp.watch(paths.template, reloadPage);
+  gulp.watch(paths.php, reloadPage);
 });
 
 gulp.task('default', ['watch', 'scripts', 'sass']);
