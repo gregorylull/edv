@@ -1,0 +1,29 @@
+/*
+  EdVentures Header
+
+  Full width of browser
+
+  - mobile first
+  - middle size
+  - large size
+
+  Essentially doesn't change, logo with words on the left, language selection on the right.
+  - Padding is about 10%
+
+*/
+
+.edv-header {
+  padding: 1em 10%;
+  height: 100px;
+  background-color: white;
+}
+
+.edv-header-logo img {
+  height: 100%;
+  width: auto;
+}
+
+.edv-header-logo {
+  display: inline-block;
+  float: left;
+}
