@@ -8,3 +8,5 @@ build
 .DS_STORE
 plan.md
 sql_db.json
+*.pdf
+assets
