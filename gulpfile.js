@@ -39,7 +39,7 @@ var paths = {
   scripts: ['./app.js', './js/angularApp/**/*.js', '!./js/angularApp/**/*_test.js'],
   template: ['./js/angularApp/**/*.html'],
   php: ['index.php','./wp_php/*.php', './php/*.php'],
-  scss: ['./bower_components/foundation/scss/*.scss', './scss/*.scss', './js/angularApp/component/**/*.scss'],
+  scss: [/*'./bower_components/foundation/scss/*.scss', './scss/*.scss', */'./js/angularApp/component/**/*.scss'],
   tests: ['./js/angularApp/**/*_test.js']
 };
 
@@ -109,8 +109,8 @@ gulp.task('sass', ['cleanCSS'],function () {
   return gulp.src(paths.scss)
     .pipe(cache('sass'))
     .pipe(sass({
-      includePaths: ['bower_components/foundation/scss'],
-      data: ['bower_components/foundation/scss'],
+      // includePaths: ['bower_components/foundation/scss'],
+      // data: ['bower_components/foundation/scss'],
       outputStyle: 'expanded'
     }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie'))

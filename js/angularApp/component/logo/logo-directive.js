@@ -24,6 +24,7 @@
 
           case 'picture':
             logo.alt = "EdVentures Logo, picture only";
+            break;
           default:
             logo.alt = "EdVentures Logo";
             break;
@@ -33,6 +34,6 @@
       },
       templateUrl: edvContent.ngPath + "/component/logo/logo-directive.html",
       replace: true
-    }
+    };
   }]);
 })(window);

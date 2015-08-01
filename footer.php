@@ -2,8 +2,9 @@
 
 <?php wp_footer(); ?>
 <script>
+  // initialize foundation
   var $ = jQuery;
-  $(document).foundation();
+  // $(document).foundation();
 </script>
 </body>
 </html>
