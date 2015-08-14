@@ -1,20 +1,49 @@
-<!-- navbar template-->
-<nav class="edv-navbar">
-  <!-- primary navbar links-->
-  <ul class="edv-navbar-primary flex">
-    <li class="flex-item" ng-repeat="linkObj in links">
-      <a href="#">{{linkObj.title | uppercase }} : {{linkObj.order}}</a>
+<!-- primary navbar links-->
+<ul class="edv-navbar-primary flex">
+  <a href="#"
+    ng-repeat="linkObj in navbar.links"
+    class="flex-item {{linkObj.title | camelCaseSpace}}" 
+    ng-class="{'nav-hover': linkObj.navHover}"
+    ng-mouseenter="navbar.showLinks(linkObj)"
+    ng-mouseleave="navbar.hideLinks(linkObj)"
+  >
+    <li>
+      {{linkObj.title | uppercase }}
     </li>
-  </ul> <!-- primary navbar links /edv-navbar-primary flex -->
+  </a>
+</ul> <!-- /.edv-navbar-primary.flex -->
 
-  <section class="edv-navbar-subsection">
-    <div role="pane" ng-repeat="linkObj in links">
-      <header>{{linkObj.title | uppercase}}</header>
-      <ul>
-        <li ng-repeat="sub in linkObj.sub"><a href="#">{{sub}}</a></li>
-      </ul>
-      <img src="{{placeholder}}" alt="placeholder square">
-    </div>
-  </section>
+<!-- secondary panes-->
+<section data-edv-navbar-subsection class="edv-navbar-subsection">
 
-</nav>
+  {{srcTest}}
+  
+  <!-- panes repeat start -->
+  <div role="pane" 
+    ng-repeat="linkObj in navbar.links"
+    ng-class="{hide: !linkObj.navHover}"
+    ng-mouseenter="navbar.showLinks(linkObj)"
+    ng-mouseleave="navbar.hideLinks(linkObj)"
+    class="nav-pane-container flex {{linkObj.title | camelCaseSpace}}"
+  >
+    
+    <header class="nav-pane-header flex-item">
+      {{linkObj.title | uppercase}}
+    </header>
+    
+    <ul class="nav-pane-sublinks-list flex flex-item">
+      <!-- sublinks repeat start-->
+      <li
+        ng-repeat="sub in linkObj.sub"
+        class="nav-pane-sublinks-links flex-item"
+      >
+        <a href="#">{{sub}}</a>
+      </li>
+    </ul>
+    
+    <img class="nav-pane-image flex-item" ng-src="{{linkObj.placeholder}}" alt="placeholder squaree">
+
+  </div> <!-- / ng-repeat -->
+
+</section> <!-- /.edv-navbar-subsection-->
+

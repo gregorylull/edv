@@ -7,7 +7,7 @@
 
 <!-- ENTRY POINT FOR BODY -->
 <div edv-header>header</div>
-<div edv-navbar> navbar </div>
+<div edv-navbar></div>
 <div ng-view>this will be some ngView</div>
 <div edv-footer>footers</div>
 

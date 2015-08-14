@@ -3,7 +3,7 @@
 <?php wp_footer(); ?>
 <script>
   // initialize foundation
-  var $ = jQuery;
+  // var $ = jQuery;
   // $(document).foundation();
 </script>
 </body>

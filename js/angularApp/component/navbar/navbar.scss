@@ -2,20 +2,31 @@
 
 .edv-navbar {
 
-  padding: 18px 10%;
 
   &-primary.flex {
     background-color: rgb(175, 15, 15);
     padding: 0;
     margin: 0;
+    padding: 0px 10%;
+    height: 60px;
+
+    list-style: none;
 
     display: flex;
     flex-direction: row;
 
+    justify-content: center;
+    align-items: stretch;
+    align-content: center;
+
+
     .flex-item {
-      display: inline-flex;
-      flex-grow: 1;
       font-family: 'Merriweather';
+
+      display: flex;
+      flex: 1 0 150px;
+      justify-content: center;
+      align-items: center;
     }
 
     a {
@@ -25,18 +36,37 @@
   }
 }
 
-.edv-navbar-subsection {
-  background-color: black;
-  color: white;
-  display: flex;
-  flex-direction: row;
+.edv-navbar {
+  &-subsection {
+    color: white;
+    position: relative;
+    width: 100%;
+  }
+}
 
-  header {
-    display: inline-flex;
+.nav-pane {
+  &-container {
+    position: absolute;
+    width: 100%;
+    background-color: red;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
   }
 
-  li {
-    display: inline-flex;
+  &-header {
+    margin-left: 10%;
+    flex: 1;
+  }
+
+  &-sublinks-list {
+    flex: 1;
+  }
+
+  &-sublinks-links {
 
     a {
       color: white;
@@ -44,8 +74,15 @@
     }
   }
 
-  img {
-    display: inline-flex;
+  &-image {
   }
+}
 
+.nav-pane-container, .nav-hover {
+  background-color: black;
+  color: white;
+}
+
+.hide {
+  visibility: hidden;
 }

@@ -42,7 +42,7 @@
 // scripts to load from html for our app
 function edv_scripts () {
   // jquery 
-  wp_enqueue_script( 'jquery', get_template_directory_uri() . bower_path("jquery"), array("edv_theme_local"));
+  // wp_enqueue_script( 'jquery', get_template_directory_uri() . bower_path("jquery"), array("edv_theme_local"));
 
   // angular core and library
   wp_enqueue_script( 'angular', get_template_directory_uri() . bower_path("angular"), array("edv_theme_local")); 

@@ -116,7 +116,7 @@ gulp.task('sass', ['cleanCSS'],function () {
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie'))
     .pipe(remember('sass'))
     .pipe(concatCSS('app.css'))
-    .pipe(minifycss())
+    // .pipe(minifycss())
     .pipe(gulp.dest('./build/css/'))
     .pipe(livereload());
 });
